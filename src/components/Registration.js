@@ -3,38 +3,45 @@ import {createUserWithEmailAndPassword, onAuthStateChanged} from "firebase/auth"
 import {auth} from "../firebase-config"
 
 const Registration = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+
+  const [emails, setEmails] = useState("")
+  const [password, setPassword] = useState("")
   const [user, setUser] = useState({})
   const [success, setSuccess] = useState(false)
   const [failure, setFailure] = useState(false)
+
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser)
   })
+
   const Register = async () => {
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      await createUserWithEmailAndPassword(auth, emails, password);
       setSuccess(true)
       setFailure(false)
     } catch (error) {
       setFailure(true)
       setSuccess(false)
     }
+
   }
-  const handleChange = event => {
-    setEmail(event.target.value)
-  }
+
   return (
     <>
       <label>
         Email :
       </label>
-      <input onChange={handleChange} value={email}/>
+      <input onChange={(e) => {
+        console.log(setEmails(e.target.value))
+      }}/>
       <br/>
       <label>
         Password :
       </label>
-      <input onChange={(e) => setPassword(e.target.value)} value={password}/>
+
+      <input onChange={(e) => {
+        setPassword(e.target.value)
+      }}/>
       <br/>
       <button onClick={Register}>Register</button>
       <br/>

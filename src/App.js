@@ -1,23 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
+import Registration from "./components/Registration";
+import Login from "./components/Login";
+import {auth} from "./firebase-config";
+import {signOut} from "firebase/auth";
+import {useState} from "react";
+import Register from "./components/Register";
 
 function App() {
+  const Logout = async () => {
+    await signOut(auth)
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        <Register/>
+      </div>
+      <br/>
+      <div>
+        <Login/>
+      </div>
+      <div>
+        <button onClick={Logout}>
+          Logout
+        </button>
+      </div>
     </div>
   );
 }
