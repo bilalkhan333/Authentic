@@ -35,7 +35,7 @@ const Login = () => {
       <button onClick={submit}>login</button>
       <br/>
       {success && <p> Login successfully</p>}
-      {failure && <p>Invalid login </p>}
+      {failure && <p>Invalid login. </p>}
     </>
   )
 }
